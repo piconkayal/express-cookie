@@ -26,7 +26,7 @@ app.post("/login", async (req, res) => {
         .json({ message: "Hello World" });
 });
 
-const PORT = process.env.APP_PORT || 8000;
+const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
     console.log(`Running on http://localhost:${PORT}`);
