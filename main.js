@@ -1,0 +1,33 @@
+require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+
+const app = express();
+
+app.use(
+    express.json(),
+    cors({
+        credentials: true,
+        origin: "*",
+        exposedHeaders: ["Set-Cookie"],
+    }),
+    cookieParser(),
+);
+
+app.post("/login", async (req, res) => {
+    res
+        .cookie("x-cookie", "123456", {
+            expires: new Date(Date.now() + 900000),
+            httpOnly: false,
+            sameSite: "None",
+            secure: true,
+        })
+        .json({ message: "Hello World" });
+});
+
+const PORT = process.env.APP_PORT || 8000;
+
+app.listen(PORT, () => {
+    console.log(`Running on http://localhost:${PORT}`);
+});
