@@ -10,7 +10,6 @@ app.use(
     cors({
         credentials: true,
         origin: ["https://codesandbox.io", "https://*.csb.app", "csb.app", "*.csb.app", "https://0vvuxr.csb.app", "https://static-cookie-app.onrender.com"],
-        exposedHeaders: ["Set-Cookie"],
     }),
     cookieParser(),
 );
@@ -25,8 +24,9 @@ var utcTime = date.toUTCString();
 app.post("/login", async (req, res) => {
     res
         .cookie("x-cookie", "123456", {
-            expires: false,
-            maxAge: utcTime,
+            domain: "https://static-cookie-app.onrender.com",
+            expires: utcTime,
+            maxAge: expiryTime,
             httpOnly: false,
             sameSite: true,
             secure: true,
