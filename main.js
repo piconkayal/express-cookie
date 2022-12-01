@@ -9,7 +9,7 @@ app.use(
     express.json(),
     cors({
         credentials: true,
-        origin: ["https://codesandbox.io"],
+        origin: ["https://codesandbox.io", "https://*.csb.app", "csb.app", "*.csb.app"],
         exposedHeaders: ["Set-Cookie"],
     }),
     cookieParser(),
