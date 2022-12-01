@@ -23,9 +23,10 @@ date.setTime(expiryTime);
 const maxAge = 3600;
 const expires = date;
 
-console.log({ maxAge, expires })
 
 app.post("/login", async (req, res) => {
+    console.log({ maxAge, expires });
+    
     res
         .cookie("x-cookie", "123456", {
             domain: 'onrender.com',
