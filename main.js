@@ -35,7 +35,7 @@ app.post("/login", async (req, res) => {
             expires,
             maxAge,
             httpOnly: true,
-            sameSite: true,
+            sameSite: 'None',
             secure: true,
         })
         .json({ message: "Hello World" });
