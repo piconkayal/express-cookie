@@ -26,6 +26,8 @@ app.post("/login", async (req, res) => {
         .json({ message: "Hello World" });
 });
 
+app.get("/info", (req, res) => res.json({ hello: "world" }));
+
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
