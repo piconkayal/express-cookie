@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 
+app.set('trust proxy', 1) ;
+
 app.use(
     express.json(),
     cors({
@@ -20,7 +22,7 @@ const date = new Date();
 const expiryTime = parseInt(date.getTime()) + timeToAdd;
 date.setTime(expiryTime);
 
-const maxAge = 3600;
+const maxAge = 5184000000 // 2 months;
 const expires = date;
 
 
@@ -29,7 +31,7 @@ app.post("/login", async (req, res) => {
     
     res
         .cookie("x-cookie", "123456", {
-            domain: 'onrender.com',
+            domain: /\.onrender\.com$/,
             expires,
             maxAge,
             httpOnly: true,
