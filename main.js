@@ -15,12 +15,20 @@ app.use(
     cookieParser(),
 );
 
+
+var timeToAdd = 1000 * 60 * 60 * 24 * 7 * 4 * 6;
+var date = new Date();
+var expiryTime = parseInt(date.getTime()) + timeToAdd;
+date.setTime(expiryTime);
+var utcTime = date.toUTCString();
+
 app.post("/login", async (req, res) => {
     res
         .cookie("x-cookie", "123456", {
-            expires: new Date(Date.now() + 900000),
+            expires: false,
+            maxAge: utcTime,
             httpOnly: false,
-            sameSite: "None",
+            sameSite: true,
             secure: true,
         })
         .json({ message: "Hello World" });
