@@ -9,19 +9,18 @@ app.use(
     express.json(),
     cors({
         credentials: true,
-        origin: ["https://codesandbox.io", "https://*.csb.app", "csb.app", "*.csb.app", "https://0vvuxr.csb.app", "https://static-cookie-app.onrender.com"],
+        origin: [/\.csb\.app$/, /\.onrender\.com$/],
     }),
     cookieParser(),
 );
 
 
-var timeToAdd = 1000 * 60 * 60 * 24 * 7 * 4 * 6;
-var date = new Date();
-var expiryTime = parseInt(date.getTime()) + timeToAdd;
+const timeToAdd = 1000 * 60 * 60 * 24 * 7 * 4 * 6;
+const date = new Date();
+const expiryTime = parseInt(date.getTime()) + timeToAdd;
 date.setTime(expiryTime);
-var utcTime = date.toUTCString();
 
-const maxAge = date.getUTCMilliseconds();
+const maxAge = 3600;
 const expires = date.toUTCString();
 
 console.log({ maxAge, expires })
@@ -29,10 +28,9 @@ console.log({ maxAge, expires })
 app.post("/login", async (req, res) => {
     res
         .cookie("x-cookie", "123456", {
-            // domain: "https://static-cookie-app.onrender.com",
             expires,
             maxAge,
-            httpOnly: false,
+            httpOnly: true,
             sameSite: true,
             secure: true,
         })
