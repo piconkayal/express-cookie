@@ -31,7 +31,7 @@ app.post("/login", async (req, res) => {
     
     res
         .cookie("x-cookie", "123456", {
-            domain: 'onrender.com',
+            domain: 'https://static-cookie-app.onrender.com',
             expires,
             maxAge,
             httpOnly: true,
