@@ -31,12 +31,12 @@ app.post("/login", async (req, res) => {
     
     res
         .cookie("x-cookie", "123456", {
-            domain: 'static-cookie-app.onrender.com',
+            domain: ['https://static-cookie-app.onrender.com', 'https://express-cookie.onrender.com'],
             expires,
             maxAge,
-            httpOnly: true,
-            sameSite: 'None',
-            secure: true,
+            httpOnly: false,
+            sameSite: false,
+            secure: false,
         })
         .json({ message: "Hello World" });
 });
