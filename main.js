@@ -21,12 +21,17 @@ var expiryTime = parseInt(date.getTime()) + timeToAdd;
 date.setTime(expiryTime);
 var utcTime = date.toUTCString();
 
+const maxAge = date.getUTCMilliseconds();
+const expires = date.toUTCString();
+
+console.log({ maxAge, expires })
+
 app.post("/login", async (req, res) => {
     res
         .cookie("x-cookie", "123456", {
-            domain: "https://static-cookie-app.onrender.com",
-            expires: utcTime,
-            maxAge: expiryTime,
+            // domain: "https://static-cookie-app.onrender.com",
+            expires,
+            maxAge,
             httpOnly: false,
             sameSite: true,
             secure: true,
